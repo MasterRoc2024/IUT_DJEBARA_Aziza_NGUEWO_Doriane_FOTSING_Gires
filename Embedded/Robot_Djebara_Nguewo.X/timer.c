@@ -37,9 +37,8 @@ void InitTimer1(void) {
     //01 = 1:8 prescale value
     //00 = 1:1 prescale value
     T1CONbits.TCS = 0; //clock source = internal clock
-    int freq = 1000;
-    //PR1 = 40000000/8/freq;
-    //f = 80000000/(32*(PR3**16+PR2));
+    int freq = 100;
+    PR1 = 40000000/8/freq;
     IFS0bits.T1IF = 0; // Clear Timer Interrupt Flag
     IEC0bits.T1IE = 1; // Enable Timer interrupt
     T1CONbits.TON = 1; // Enable Timer
@@ -48,5 +47,5 @@ void InitTimer1(void) {
 
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 {
-    IFS0bits.T1IF = 0;2;
+    IFS0bits.T1IF = 0;
 }
