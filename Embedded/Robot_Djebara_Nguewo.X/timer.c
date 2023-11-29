@@ -1,4 +1,4 @@
-#include <xc.h>
+#include "xc.h"
 #include "timer.h"
 #include "IO.h"
 #include "PWM.h"
@@ -29,12 +29,12 @@ void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     LED_ORANGE = !LED_ORANGE;
     if (toggle == 0)
  {
-        PWMSetSpeed(20, MOTEUR_DROIT);
-        PWMSetSpeed(20, MOTEUR_GAUCHE);
+        PWMSetSpeedConsigne(20, MOTEUR_DROIT);
+        PWMSetSpeedConsigne(20, MOTEUR_GAUCHE);
         toggle = 1;
     } else {
-        PWMSetSpeed(-20, MOTEUR_DROIT);
-        PWMSetSpeed(-20, MOTEUR_GAUCHE);
+        PWMSetSpeedConsigne(-20, MOTEUR_DROIT);
+        PWMSetSpeedConsigne(-20, MOTEUR_GAUCHE);
         toggle = 0;
     }
 }
@@ -45,7 +45,6 @@ void InitTimer1(void) {
     T1CONbits.TON = 0; // Disable Timer
     T1CONbits.TCKPS = 0b01; //Prescaler
     //11 = 1:256 prescale value
-
     //10 = 1:64 prescale value
     //01 = 1:8 prescale value
     //00 = 1:1 prescale value
@@ -60,5 +59,5 @@ void InitTimer1(void) {
 
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
+    PWMUpdateSpeed();
 }
-
