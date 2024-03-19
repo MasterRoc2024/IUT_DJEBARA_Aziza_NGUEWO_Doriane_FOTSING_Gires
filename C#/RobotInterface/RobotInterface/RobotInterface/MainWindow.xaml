@@ -8,25 +8,26 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="50"/>
+      
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+     
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="Emission" Grid.Column="1" Grid.Row="1"  Header="GroupBox" Background="#FFA6DEB9" BorderBrush="#FF0A0707" >
+        <GroupBox x:Name="Emission" Grid.Column="0" Grid.Row="0"  Header="GroupBox" Background="#FFA6DEB9" BorderBrush="#FF0A0707" Margin="0,0,5,0" >
             <TextBox x:Name="textBoxEmission" TextWrapping="Wrap" Text="" BorderBrush="{x:Null}" Background="{x:Null}" AcceptsReturn="True"/>
         </GroupBox>
-        <GroupBox x:Name="Réception" Grid.Column="3" Grid.Row="1" Header="GroupBox" BorderBrush="#FF14384E" Background="#FF863434" >
+        <GroupBox x:Name="Réception" Grid.Column="3" Grid.Row="0" Header="GroupBox" BorderBrush="#FF14384E" Background="#FF863434"  Margin="05,0,0,0">
             <TextBox x:Name="textBoxReception" TextWrapping="Wrap" Text="" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True" />
         </GroupBox>
-        <Button x:Name="buttonEnvoyer" Grid.Column="1" Content="Envoyer" Grid.Row="2" HorizontalAlignment="Center" Height="30" Margin="0,30,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Click="Envoyer_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button x:Name="buttonEnvoyer" Content="Envoyer" HorizontalAlignment="Center" Height="30" Click="Envoyer_Click" Margin="10" Width="72" />
+            <Button x:Name="buttonClear" Content="Clear"  HorizontalAlignment="Center" Height="30" Width="72" Margin="10" Click="buttonClear_Click"/>
+            <Button x:Name="buttonTest" Content="Test"  HorizontalAlignment="Center" Height="30" Width="72" Margin="10"/>
+        </StackPanel>
+        
     </Grid>
 </Window>
