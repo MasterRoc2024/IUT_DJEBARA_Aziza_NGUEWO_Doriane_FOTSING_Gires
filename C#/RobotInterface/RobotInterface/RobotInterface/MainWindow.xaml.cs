@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using ExtendedSerialPort_NS;
 using System.IO.Ports;
 using System.Windows.Threading;
+using RobotInterface;
 
 namespace RobotInterface
 {
@@ -22,6 +23,8 @@ namespace RobotInterface
     {
         private ExtendedSerialPort serialPort1;
         DispatcherTimer timerAffichage;
+
+        Robot robot = new Robot();
 
         public MainWindow()
         {
@@ -58,7 +61,7 @@ namespace RobotInterface
         }
         private void SendMessage()
         {
-            serialPort1.WriteLine("bonjour");
+            serialPort1.WriteLine("Bonjour");
         }
 
         private void ClearMessage()
@@ -69,6 +72,16 @@ namespace RobotInterface
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
             textBoxReception.Text = "";
+        }
+
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] byteList = new byte[20];
+            for (int i = 0; i < 20; ++i)
+            {
+                byteList[i] = (byte)(2 * i);
+            }
+            serialPort1.Write(byteList, 0, byteList.Length);
         }
     }
 }
