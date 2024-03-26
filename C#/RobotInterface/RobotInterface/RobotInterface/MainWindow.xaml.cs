@@ -68,8 +68,7 @@ namespace RobotInterface
 
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
-
-
+            textBoxReception.Text = "";
         }
     }
 }
