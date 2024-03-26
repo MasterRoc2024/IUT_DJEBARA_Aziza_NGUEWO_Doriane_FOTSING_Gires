@@ -10,34 +10,46 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ExtendedSerialPort_NS;
 using System.IO.Ports;
+using System.Windows.Threading;
 
 namespace RobotInterface
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-   
+
     public partial class MainWindow : Window
     {
         private ExtendedSerialPort serialPort1;
+        DispatcherTimer timerAffichage;
+
         public MainWindow()
         {
             InitializeComponent();
             serialPort1 = new ExtendedSerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
+            serialPort1.DataReceived += SerialPort1_DataReceived;
             serialPort1.Open();
 
-            callback SerialPort1_DataReceived;
-            serialPort1 = new ReliableSerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
-            serialPort1.DataReceived += SerialPort1_DataReceived
-            serialPort1.Open();
-            public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
-            { }
-
+            timerAffichage = new DispatcherTimer();
+            timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            timerAffichage.Tick += TimerAffichage_Tick;
+            timerAffichage.Start();
         }
+
+        private void TimerAffichage_Tick(object? sender, EventArgs e)
+        {
+            if(receivedText!="")
+            {
+                textBoxReception.Text += receivedText;
+                receivedText = "";
+            }
+        }
+
+        string receivedText;
 
         public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            textBoxReception.Text += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
         }
         private void Envoyer_Click(object sender, RoutedEventArgs e)
         {
@@ -46,24 +58,18 @@ namespace RobotInterface
         }
         private void SendMessage()
         {
-            textBoxReception.Text += "Reçu:" + " " + textBoxEmission.Text + "\n";
-            textBoxEmission.Text = textBoxEmission.Text;
             serialPort1.WriteLine("bonjour");
-
         }
 
-        private void serialPort1_DataReceived(object? sender, DataReceivedArgs e)
+        private void ClearMessage()
         {
-            throw new NotImplementedException();
+
         }
 
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-    }
 
-    internal class callback
-    {
+        }
     }
 }
