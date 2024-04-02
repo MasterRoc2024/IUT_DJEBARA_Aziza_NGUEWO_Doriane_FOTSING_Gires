@@ -41,10 +41,10 @@ namespace RobotInterface
 
         private void TimerAffichage_Tick(object? sender, EventArgs e)
         {
-            while(robot.receivedText.Length>0) //Tant qu'il reste des octets stockés dans la queue
+            while(robot.byteListReceived.Count>0) //Tant qu'il reste des octets stockés dans la queue
             {
                 byte octet = robot.byteListReceived.Dequeue();
-                textBoxReception.Text += octet;
+                textBoxReception.Text += "0x"+octet.ToString("X2") + " "; // On affiche chaque octet séparément en hexadécimal sur 2 caractères minimum
             }
             //if(receivedText!="")
             //{

@@ -5,6 +5,7 @@
 #include "IO.h"
 #include "timer.h"
 #include "PWM.h"
+#include "UART.h"
 
 int main(void) {
     /***************************************************************************************************/
@@ -18,6 +19,7 @@ int main(void) {
     InitIO();
     InitTimer1();
     InitTimer23();
+    InitUART();
     
     InitPWM();
     
@@ -32,6 +34,9 @@ int main(void) {
     // Boucle Principale
     /****************************************************************************************************/
     while (1) {
+        //SendMessageDirect((unsigned char*) "Bonjour", 7);
+        //__delay32(4000000);
+
     } // fin main
 }
 
