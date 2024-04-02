@@ -41,18 +41,28 @@ namespace RobotInterface
 
         private void TimerAffichage_Tick(object? sender, EventArgs e)
         {
-            if(receivedText!="")
+            while(robot.receivedText.Length>0) //Tant qu'il reste des octets stockés dans la queue
             {
-                textBoxReception.Text += receivedText;
-                receivedText = "";
+                byte octet = robot.byteListReceived.Dequeue();
+                textBoxReception.Text += octet;
             }
+            //if(receivedText!="")
+            //{
+            //    textBoxReception.Text += receivedText;
+            //    receivedText = "";
+            //}
         }
 
         string receivedText;
 
         public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            for(int i=0; i< e.Data.Length; i++) //On itère sur tous les octets reçu de e.Data
+            {
+                byte octet = e.Data[i];
+                robot.byteListReceived.Enqueue(octet); //On ajoute les octets un par un à la queue
+            }
+            //receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
         }
         private void Envoyer_Click(object sender, RoutedEventArgs e)
         {
