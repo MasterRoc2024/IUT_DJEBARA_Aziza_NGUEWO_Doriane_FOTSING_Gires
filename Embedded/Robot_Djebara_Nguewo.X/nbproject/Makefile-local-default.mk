@@ -34,4 +34,4 @@ MP_CC_DIR="C:\Program Files\Microchip\xc16\v2.00\bin"
 MP_AS_DIR="C:\Program Files\Microchip\xc16\v2.00\bin"
 MP_LD_DIR="C:\Program Files\Microchip\xc16\v2.00\bin"
 MP_AR_DIR="C:\Program Files\Microchip\xc16\v2.00\bin"
-DFP_DIR=C:/Users/Table2/.mchp_packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.3.85
+DFP_DIR=C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/dsPIC33E-GM-GP-MC-GU-MU_DFP/1.4.139
